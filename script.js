@@ -75,15 +75,7 @@ new Vue({
         },
         generateData: function (str) {
             for (let cnt = 0; cnt < this.info.dataNum; cnt++) {
-                for (let key = 0; key < this.info.len; key++) {
-                    str += this.info.constraint[key](this.info.dataNum)
-                    if (key !== this.info.len - 1) {
-                        str += ','
-                    }
-                    else {
-                        str += '\n'
-                    }
-                }
+                str = this.generateDatum(str)
             }
             return str
         },
