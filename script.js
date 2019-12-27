@@ -36,49 +36,39 @@ new Vue({
         head: '',
         body: []
       },
+      col2gen: {
+        id: gen.num,
+        name: gen.name,
+        country: gen.country,
+        mail: gen.mail
+      },
       message: 'abc',
-      info: {
-        head       : ['id', 'name', 'country', 'mail'],
-        constraint : [gen.num, gen.name, gen.country, gen.mail],
-        dataNum    : 10000,
-        style      : 'csv',
-        len        : 4
-      }
+      col: ['id', 'name', 'country', 'mail'],
+      dataNum: 10000,
+      style: 'csv'
     }
   },
   methods: {
-    generateHead: function (str) {
-      for (let key = 0; key < this.info.len; key++) {
-        str += this.info.head[key]
-        if(key !== this.info.len - 1) {
-          str += ','
-        }
-        else {
-          str += '\n'
-        }
+    genHead: function (str) {
+      for (let c of this.col) {
+        str += c + ','
       }
-      return str
+      return str.slice(0, -1) + '\n'
     },
-    generateDatum: function (str) {
-      for (let key = 0; key < this.info.len; key++) {
-        str += this.info.constraint[key](this.info.dataNum)
-        if (key !== this.info.len - 1) {
-          str += ','
-        }
-        else {
-          str += '\n'
-        }
+    genDatum: function (str) {
+      for (let c of this.col) {
+        str += this.col2gen[c](this.dataNum) + ','
       }
-      return str
+      return str.slice(0, -1) + '\n'
     },
-    generateData: function (str) {
-      for (let cnt = 0; cnt < this.info.dataNum; cnt++) {
-        str = this.generateDatum(str)
+    genData: function (str) {
+      for (let cnt = 0; cnt < this.dataNum; cnt++) {
+        str = this.genDatum(str)
       }
       return str
     },
     handleDownload: function () {
-      let content = this.generateData(this.generateHead(''))
+      let content = this.genData(this.genHead(''))
       let blob = new Blob([content], { "type" : "text/plain"});
       
       if (window.navigator.msSaveBlob) {
@@ -90,9 +80,9 @@ new Vue({
     }
   },
   created: function () {
-    this.res.head = this.generateHead('').split(',')
+    this.res.head = this.genHead('').split(',')
     for(let cnt = 0; cnt < 10; cnt++){
-      this.res.body.push(this.generateDatum('').split(','))
+      this.res.body.push(this.genDatum('').split(','))
     }
     this.res.body.push('.........')
   }
