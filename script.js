@@ -1,11 +1,7 @@
 /*
- * CSV export routine
- */
-// TODO: CSV export routine
-
-/*
  * my Random function
  */
+
 
 const basestr = "abcdefghigklmnopqrstuvwxyz"
 const baseSTR = "ABCDEFGHIGKLMNOPQRSTUVWXYZ"
@@ -124,6 +120,24 @@ function showData () {
   }
 }
 
+/**
+ * Download
+ */
+
+function handleDownload() {
+  let content = generateHead('')
+  for (let cnt = 0; cnt < info.dataNum; cnt++) {
+    content += generateDatum('')
+  }
+  let blob = new Blob([content], { "type" : "text/plain"});
+
+  if (window.navigator.msSaveBlob) {
+    window.navigator.msSaveBlob(blob, "out.csv");
+    window.navigator.msSaveOrOpenBlob(blob, "out.csv");
+  } else {
+    document.getElementById("download").href = window.URL.createObjectURL(blob);
+  }
+}
 
 
 
