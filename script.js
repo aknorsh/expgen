@@ -125,10 +125,7 @@ function showData () {
  */
 
 function handleDownload() {
-  let content = generateHead('')
-  for (let cnt = 0; cnt < info.dataNum; cnt++) {
-    content += generateDatum('')
-  }
+  let content = generateData(generateHead(''))
   let blob = new Blob([content], { "type" : "text/plain"});
 
   if (window.navigator.msSaveBlob) {
