@@ -12,7 +12,22 @@
       <hr>
       {{info}}
       <hr>
-      {{res}}
+        <table>
+          <thead>
+            <tr>
+              <th v-for="h in res.head">
+                {{ h }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="datum in res.body">
+              <td v-for="d in datum">
+                {{ d }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
     </div>
   </body>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>

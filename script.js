@@ -37,7 +37,10 @@ new Vue({
     el: '#main',
     data: function () {
         return {
-            res: '',
+            res: {
+                head: '',
+                body: []
+            },
             message: 'abc',
             info: {
                 head       : ['id', 'name', 'country', 'mail'],
@@ -92,6 +95,10 @@ new Vue({
         }
     },
     created: function () {
-        this.res = this.generateData(this.generateHead(''))
+        this.res.head = this.generateHead('').split(',')
+        for(let cnt = 0; cnt < 10; cnt++){
+            this.res.body.push(this.generateDatum('').split(','))
+        }
+        this.res.body.push('.........')
     }
 })
