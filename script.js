@@ -112,15 +112,6 @@ function generateData (str) {
   return str
 }
 
-const bbb = (i) => {
-  return (a) => a+i
-}
-
-console.log(bbb)
-console.log(bbb(1))
-console.log(bbb(1)(2))
-
-
 /*
  * Show Information
  */
