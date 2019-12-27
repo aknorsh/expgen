@@ -3,15 +3,18 @@
   <head>
     <title>Expgen</title>
     <meta charset="utf-8">
-    <script src="script.js" rel="text/javascript"></script>
   </head>
   <body>
     <h1>EXP Generator</h1>
 
-    <a id="download" href="#" download="out.csv" onclick="handleDownload()">Download</a>
-    <hr>
-
-    <script>showHeads()</script> <br>
-    <script>showData()</script>
+    <div id="main">
+      <a id="download" href="#" download="out.csv" @click="handleDownload()">Download</a>
+      <hr>
+      {{info}}
+      <hr>
+      {{res}}
+    </div>
   </body>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="component.js"></script>
 </html>
